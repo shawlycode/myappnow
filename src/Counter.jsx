@@ -1,35 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {useSelector , useDispatch }from 'react-redux';
+import {decrement ,increment} from '../src/CounterSlice'
 
-class Counter extends Component {
-    constructor(props){
-        super(props);
-        this.state = {count:0 }
-    }
-    handleIncrease= (e)=>{
-        e.preventDefault();
-        // console.log("increased");
-        this.setState({count:this.state.count +1})
-    }
-    handleDecrease= (e)=>{
-        e.preventDefault();
-        console.log("decreased")
-        this.setState({count:this.state.count -1})
-    }
-    handleIncreaseByAmount= (e)=>{
-        e.preventDefault();
-        console.log("increasedbyamount")
-        this.setState({count:this.state.count +30})
-    }
-    render() {
+export function Counter() {
+    const count = useSelector((state)=> state.count.value)
+    const dispatch = useDispatch()
+  
         return (
             <div>
-                <h1>COUNT:{this.state.count}</h1>
-                <button onClick= {this.handleIncrease}>increase</button>
-                <button onClick= {this.handleDecrease}>deincrease</button>
-                <button onClick= {this.handleIncreaseByAmount}>increaseByAmount</button>
+                <h1>COUNT:{count}</h1>
+                <button onClick= {()=>dispatch(increment())}>increase</button>
+                <button onClick= {()=>dispatch(decrement())}>decrease</button>
+                
             </div>
         );
     }
-}
+
 
 export default Counter;
